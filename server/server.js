@@ -3,15 +3,19 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const axios = require('axios');
+const scrape = require('./puppeteer')
 
 app.use(express.static(path.join(__dirname, '..', '/client/dist')));
 app.use(express.json());
 
 app.get('/things', async (req, res) => {
   try {
-    const response = await axios.get('https://sfbay.craigslist.org/');
+    // const response = await axios.get('https://www.privatemathtutoring.com/');
     // debugger;
-    res.send(response.data);
+    scrape();
+
+    // res.send(response.data);
+    res.send('works');
   } catch(err) {
     console.log(err);
     res.sendStatus(404);
