@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 const App = () => {
-  const thing = async () => {
+  const scrape = async () => {
     try {
-      const response = await axios.get('/things');
+      const response = await axios.get('/scrape');
       console.log(response.data);
     } catch(err) {
       console.log(err);
@@ -13,9 +13,9 @@ const App = () => {
   }
   return (
     <>
-    <h1>THIS MY APP</h1>
-    <div>with more stuff</div>
-    <button onClick={thing}>Click</button>
+    <h1>Web Scraper</h1>
+    <div>I'll eventually let you enter the craigslist URL</div>
+    <button onClick={scrape}>Scrape</button>
     </>
   )
 }

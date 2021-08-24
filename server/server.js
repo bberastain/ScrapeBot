@@ -8,14 +8,10 @@ const scrape = require('./puppeteer')
 app.use(express.static(path.join(__dirname, '..', '/client/dist')));
 app.use(express.json());
 
-app.get('/things', async (req, res) => {
+app.get('/scrape', async (req, res) => {
   try {
-    // const response = await axios.get('https://www.privatemathtutoring.com/');
-    // debugger;
-    scrape();
-
-    // res.send(response.data);
-    res.send('works');
+    const results = await scrape();
+    res.send(results);
   } catch(err) {
     console.log(err);
     res.sendStatus(404);
