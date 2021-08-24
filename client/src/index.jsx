@@ -19,9 +19,10 @@ const App = () => {
   return (
     <>
     <h1>Web Scraper</h1>
-    <div>I'll eventually let you enter the craigslist URL</div>
+    <div>There is a hardcoded craigslist link you can scrape from, but I'll eventually let you upload one.<br></br>
+    (Scrape is a little slow so give it 2 secs)</div>
     <ul>
-    {scrapedLinks.map((i, index) => <li><a href={i}>Link # {index}</a></li>)}
+    {scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.time}</li>)}
     </ul>
     <button onClick={scrape}>Scrape</button>
     </>
