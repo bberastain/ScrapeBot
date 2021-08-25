@@ -23,6 +23,16 @@ app.get('/links', async (req, res) => {
   }
 })
 
+app.get('/drop', (req, res) => {
+  try {
+    let table = 'listings'
+    db.query(`DROP TABLE ${table}`);
+  } catch(err) {
+    console.log(err);
+    res.send(err);
+  }
+})
+
 app.get('/scrape', async (req, res) => {
   try {
     let results = await scrape();

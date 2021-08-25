@@ -26,6 +26,16 @@ const App = () => {
       console.log(err);
     }
   }
+
+  const dropTable = async () => {
+    try {
+      axios.get('/drop');
+      setLinks([]);
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
     <h1>CraigsList Aggregator</h1>
@@ -36,6 +46,7 @@ const App = () => {
       {scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.date}</li>)}
       </ul>
       <button onClick={scrape}>Scrape</button>
+      <button onClick={dropTable}>Delete</button>
     </div>
     </>
   )
