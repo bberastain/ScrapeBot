@@ -16,11 +16,10 @@ const scrape = async () => {
       results.push({
         link: links[i].href,
         text: links[i].innerText,
-        time: times[i].dateTime
+        date: times[i].dateTime
       })
     }
-
-    console.log(links)
+    // console.log(links)
     return results;
   })
   await browser.close();
