@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const NewList = () => {
+const NewList = (props) => {
   const [newList, setList] = useState({url: '', title: ''});
 
   const handleClick = () => {
-    console.log(newList);
+    props.newTable(newList);
     setList({url: '', title: ''});
   }
 

@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS searches (
   id SERIAL PRIMARY KEY,
   link VARCHAR (500) UNIQUE,
-  title VARCHAR (50)
+  title VARCHAR (50) UNIQUE
 );
 
--- CREATE TABLE IF NOT EXISTS listings (
+-- CREATE TABLE IF NOT EXISTS <title> (
 --   id SERIAL PRIMARY KEY,
 --   link VARCHAR (300) UNIQUE,
 --   text VARCHAR (100),

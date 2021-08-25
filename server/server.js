@@ -23,6 +23,23 @@ app.get('/links', async (req, res) => {
   }
 })
 
+app.post('/createTable', (req, res) => {
+  try {
+    let { title, url } = req.body;
+    let tableName= title.split(' ').join('')
+    db.none(`CREATE TABLE IF NOT EXISTS ${tableName} (
+      id SERIAL PRIMARY KEY,
+      link VARCHAR (300) UNIQUE,
+      text VARCHAR (100),
+      date VARCHAR (100))`)
+      .then(() => {
+        db.none(`INSERT INTO searches (link, title) VALUES ($1, $2)`, [url, title])
+      })
+  } catch(err) {
+    res.send(err);
+  }
+})
+
 app.get('/drop', (req, res) => {
   try {
     let table = 'listings'

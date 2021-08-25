@@ -18,6 +18,17 @@ const App = () => {
     }
   }, [])
 
+  const newTable = (obj) =>{
+    axios.post('/createTable', obj)
+      .then(() => {
+        // scrape data
+        // render new table
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   const scrape = async () => {
     try {
       let response = await axios.get('/scrape');
@@ -44,7 +55,7 @@ const App = () => {
     <>
     <h1>CRAIGSLIST AGGREGATOR</h1>
     <div>A simple way to track the newest listings</div>
-    <NewList />
+    <NewList newTable={(obj) => newTable(obj)}/>
     <Tables
       scrape={scrape}
       dropTable={dropTable}
