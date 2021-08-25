@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Tables from './tables.jsx';
+import NewList from './newList.jsx';
 
 const App = () => {
   const [scrapedLinks, setLinks] = useState([]);
@@ -43,6 +44,7 @@ const App = () => {
     <>
     <h1>CRAIGSLIST AGGREGATOR</h1>
     <div>A simple way to track the newest listings</div>
+    <NewList />
     <Tables
       scrape={scrape}
       dropTable={dropTable}
