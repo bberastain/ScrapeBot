@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Tables from './tables.jsx';
 
 const App = () => {
   const [scrapedLinks, setLinks] = useState([]);
@@ -8,7 +9,9 @@ const App = () => {
   useEffect( async () => {
     try {
       let links = await axios.get('/links');
-      setLinks(links.data);
+      if (Array.isArray(links.data)) {
+        setLinks(links.data)
+      }
     } catch(err) {
       console.log(err);
     }
@@ -38,16 +41,12 @@ const App = () => {
 
   return (
     <>
-    <h1>CraigsList Aggregator</h1>
-    <div>There is a hardcoded craigslist link you can scrape from, but I'll eventually let you upload one.<br></br>
-    (Scrape is a little slow so give it 2 secs)</div>
-    <div className="scrape-results">
-      <ul>
-      {scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.date}</li>)}
-      </ul>
-      <button onClick={scrape}>Scrape</button>
-      <button onClick={dropTable}>Delete</button>
-    </div>
+    <h1>CRAIGSLIST AGGREGATOR</h1>
+    <div>A simple way to track the newest listings</div>
+    <Tables
+      scrape={scrape}
+      dropTable={dropTable}
+      scrapedLinks={scrapedLinks}/>
     </>
   )
 }
