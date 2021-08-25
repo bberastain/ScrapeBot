@@ -31,10 +31,12 @@ const App = () => {
     <h1>CraigsList Aggregator</h1>
     <div>There is a hardcoded craigslist link you can scrape from, but I'll eventually let you upload one.<br></br>
     (Scrape is a little slow so give it 2 secs)</div>
-    <ul>
-    {scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.date}</li>)}
-    </ul>
-    <button onClick={scrape}>Scrape</button>
+    <div className="scrape-results">
+      <ul>
+      {scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.date}</li>)}
+      </ul>
+      <button onClick={scrape}>Scrape</button>
+    </div>
     </>
   )
 }
