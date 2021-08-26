@@ -16,7 +16,9 @@ app.use(morgan('tiny'));
 app.get('/drop', (req, res) => {
   try {
     let table = req.query.table
-    db.query('DROP TABLE ' + table);
+    db.none('DROP TABLE ' + table[0]);
+    db.none('DELETE FROM searches WHERE tablename=$1', [table[0]]);
+    res.send('Dropped table');
   } catch(err) {
     console.log(err);
     res.send(err);
@@ -37,21 +39,21 @@ app.get('/links', async (req, res) => {
     }
     res.send(results);
   } catch(err) {
-    res.send(err);
+    res.send({});
   }
 })
 
 app.post('/createTable', (req, res) => {
   try {
     let { title, url } = req.body;
-    let tableName= title.split(' ').join('')
-    db.none(`CREATE TABLE IF NOT EXISTS ${tableName} (
+    let table= title.split(' ').join('').toLowerCase();
+    db.none(`CREATE TABLE IF NOT EXISTS ` + table + `(
       id SERIAL PRIMARY KEY,
       url VARCHAR (300) UNIQUE,
       text VARCHAR (100),
       date VARCHAR (100))`)
       .then(() => {
-        db.none(`INSERT INTO searches (url, title, tableName) VALUES ($1, $2, $3)`, [url, title, tableName])
+        db.none(`INSERT INTO searches (url, title, tablename) VALUES ($1, $2, $3)`, [url, title, table])
       })
     res.send('Creating new table, just a second while I scrape up some links');
   } catch(err) {

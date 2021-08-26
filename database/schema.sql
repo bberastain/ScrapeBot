@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS searches (
   id SERIAL PRIMARY KEY,
   url VARCHAR (500) UNIQUE,
   title VARCHAR (50) UNIQUE,
-  tableName VARCHAR (50) UNIQUE
+  tablename VARCHAR (50) UNIQUE
 );
 
 -- CREATE TABLE IF NOT EXISTS <title> (

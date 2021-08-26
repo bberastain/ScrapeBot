@@ -40,7 +40,7 @@ const App = () => {
 
   const scrape = async (obj) => {
     try {
-      let table = obj.title.split(' ').join('');
+      let table = obj.title.split(' ').join('').toLowerCase();
       let response = await axios.get('/scrape', {
         params: {
           table: table,
@@ -64,9 +64,9 @@ const App = () => {
           table: table
         }
       });
-      let hooks = scrapedLinks;
-      delete hooks[table];
-      setLinks({...hooks});
+      let tempLinks = scrapedLinks;
+      delete tempLinks[table];
+      setLinks({...tempLinks});
     } catch(err) {
       console.log(err)
     }
