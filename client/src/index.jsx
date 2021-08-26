@@ -17,27 +17,10 @@ const App = () => {
   useEffect( async () => {
     try {
       let results = await axios.get('/links');
-      // debugger;
       setLinks(results.data);
     } catch(err) {
       console.log(err)
     }
-    // try {
-    //   for (var key in scrapedLinks) {
-    //     let links = await axios.get('/links', {
-    //       params: {
-    //         table: key
-    //       }
-    //     });
-    //     setLinks(...scrapedLinks)
-    //   }
-    //   let links = await axios.get('/links');
-    //   if (Array.isArray(links.data)) {
-    //     setLinks(links.data)
-    //   }
-    // } catch(err) {
-    //   console.log(err);
-    // }
   }, [])
 
   const newTable = (obj) =>{
@@ -74,10 +57,12 @@ const App = () => {
     }
   }
 
-  const dropTable = async () => {
+  const dropTable = async (table) => {
     try {
-      axios.get('/drop');
-      setLinks([]);
+      // axios.get('/drop', );
+      let hooks = scrapedLinks;
+      delete hooks[table];
+      setLinks({...hooks});
     } catch(err) {
       console.log(err)
     }
@@ -86,15 +71,14 @@ const App = () => {
   return (
     <>
     <h1>CRAIGSLIST AGGREGATOR</h1>
-    <div>A simple way to track the newest listings</div>
+    <h2>A simple way to track the newest listings</h2>
+    <h3>Text updates via Twilio COMING SOON</h3>
     <NewList newTable={(obj) => newTable(obj)}/>
     {Object.keys(scrapedLinks).map(key =>
-      <Tables scrapedLinks={scrapedLinks[key]} />
+      <Tables
+        scrapedLinks={scrapedLinks[key]}
+        dropTable={(table) => dropTable(table)}/>
     )}
-    {/* <Tables
-      scrape={obj => scrape(obj)}
-      dropTable={dropTable}
-      scrapedLinks={scrapedLinks}/> */}
     </>
   )
 }
