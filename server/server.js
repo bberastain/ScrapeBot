@@ -45,7 +45,7 @@ app.post('/createTable', (req, res) => {
       .then(() => {
         db.none(`INSERT INTO searches (url, title, tableName) VALUES ($1, $2, $3)`, [url, title, tableName])
       })
-    res.send('Created new table, scraping links');
+    res.send('Creating new table, just a second while I scrape up some links');
   } catch(err) {
     res.send(err);
   }

@@ -3,11 +3,14 @@ import React from 'react';
 const Tables = (props) => {
   return (
     <div className="scrape-results">
+      <h3>{props.scrapedLinks.title}</h3>
       <ul>
-      {props.scrapedLinks.map((item, index) => <li><a href={item.link}>{item.text}</a> - posted {item.date}</li>)}
+      {[...new Array(props.scrapedLinks.quantity)].map((i, index) =>
+      <li><a href={props.scrapedLinks.data[index].url}>{props.scrapedLinks.data[index].text}</a> - posted {props.scrapedLinks.data[index].date}</li>
+      )}
       </ul>
-      <button onClick={() => props.scrape()}>Scrape</button>
-      <button onClick={() => props.dropTable()}>Delete</button>
+      <button >Scrape</button>
+      <button >Delete</button>
     </div>
   )
 }

@@ -5,7 +5,14 @@ import Tables from './tables.jsx';
 import NewList from './newList.jsx';
 
 const App = () => {
-  const [scrapedLinks, setLinks] = useState([]);
+  const [scrapedLinks, setLinks] = useState({});
+  /*
+  {tableName: {
+    data: [],
+    title: title,
+    quantity: 10 // default
+  }}
+  */
 
   useEffect( async () => {
     try {
@@ -42,12 +49,11 @@ const App = () => {
           url: obj.url
         }
       });
-      // Display Quantity should be stored in hook
-      // let shortenedResponse = [];
-      // for (var i = 0; i < 10; i++) {
-      //   shortenedResponse.push(response.data[i]);
-      // }
-      // setLinks(shortenedResponse);
+      setLinks({...scrapedLinks, [table] : {
+        data: response.data,
+        title: obj.title,
+        quantity: 10, // set this default elsewhere so it doesn't always reset
+      }})
     } catch(err) {
       console.log(err);
     }
@@ -67,6 +73,9 @@ const App = () => {
     <h1>CRAIGSLIST AGGREGATOR</h1>
     <div>A simple way to track the newest listings</div>
     <NewList newTable={(obj) => newTable(obj)}/>
+    {Object.keys(scrapedLinks).map(key =>
+      <Tables scrapedLinks={scrapedLinks[key]} />
+    )}
     {/* <Tables
       scrape={obj => scrape(obj)}
       dropTable={dropTable}

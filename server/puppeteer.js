@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer');
 
 const scrape = async (url) => {
-  debugger;
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto(url);
@@ -15,7 +14,7 @@ const scrape = async (url) => {
     let results = [];
     for (var i = 0; i < links.length; i++) {
       results.push({
-        link: links[i].href,
+        url: links[i].href,
         text: links[i].innerText,
         date: times[i].dateTime
       })
