@@ -80,13 +80,15 @@ const App = () => {
     <h2>A simple way to track the newest listings</h2>
     <h3>Text updates via Twilio COMING SOON</h3>
     <NewList newTable={(obj) => newTable(obj)}/>
+    <div className="results">
     {Object.keys(scrapedLinks).map(key =>
       <Tables
-        scrapedLinks={scrapedLinks[key]}
-        tableName={[key]}
-        scrape={(obj) => scrape(obj)}
-        dropTable={(table) => dropTable(table)}/>
-    )}
+      scrapedLinks={scrapedLinks[key]}
+      tableName={[key]}
+      scrape={(obj) => scrape(obj)}
+      dropTable={(table) => dropTable(table)}/>
+      )}
+    </div>
     </>
   )
 }
