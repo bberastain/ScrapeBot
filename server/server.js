@@ -56,7 +56,8 @@ app.get('/scrape', async (req, res) => {
     let table = req.query.table;
     let results = await scrape(req.query.url);
     // a 304 status code means nothing was updated, implement a check to save time
-    for (var i = 0; i < results.length; i++) {
+    // for (var i = 0; i < results.length; i++) {
+    for (var i = 0; i < 2; i++) {
       db.none('INSERT INTO $1 (url, text, date) VALUES($2, $3, $4) ON CONFLICT (url) DO NOTHING', [table, results[i].url, results[i].text, results[i].date])
         .then(() => {
         })
