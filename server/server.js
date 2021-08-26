@@ -25,8 +25,16 @@ app.get('/drop', (req, res) => {
 
 app.get('/links', async (req, res) => {
   try {
-    let limit = 10;
-    let results = await db.query(`SELECT * FROM listings LIMIT ${limit}`);
+    let tables = await db.query(`SELECT title, tableName FROM searches`);
+    let results = {};
+    for (var obj of tables) {
+      let links = await db.query('SELECT * FROM ' + obj.tablename);
+      results = {...results, [obj.tablename]: {
+        data: links,
+        title: obj.title,
+        quantity: 10
+      }}
+    }
     res.send(results);
   } catch(err) {
     res.send(err);

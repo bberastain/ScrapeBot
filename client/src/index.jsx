@@ -8,7 +8,7 @@ const App = () => {
   const [scrapedLinks, setLinks] = useState({});
   /*
   {tableName: {
-    data: [],
+    data: [{url, text, date}...],
     title: title,
     quantity: 10 // default
   }}
@@ -16,13 +16,28 @@ const App = () => {
 
   useEffect( async () => {
     try {
-      let links = await axios.get('/links');
-      if (Array.isArray(links.data)) {
-        setLinks(links.data)
-      }
+      let results = await axios.get('/links');
+      // debugger;
+      setLinks(results.data);
     } catch(err) {
-      console.log(err);
+      console.log(err)
     }
+    // try {
+    //   for (var key in scrapedLinks) {
+    //     let links = await axios.get('/links', {
+    //       params: {
+    //         table: key
+    //       }
+    //     });
+    //     setLinks(...scrapedLinks)
+    //   }
+    //   let links = await axios.get('/links');
+    //   if (Array.isArray(links.data)) {
+    //     setLinks(links.data)
+    //   }
+    // } catch(err) {
+    //   console.log(err);
+    // }
   }, [])
 
   const newTable = (obj) =>{
