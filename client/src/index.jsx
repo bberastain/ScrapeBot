@@ -11,6 +11,7 @@ const App = () => {
     data: [{url, text, date}...],
     title: title,
     quantity: 10 // default
+    url: search-link
   }}
   */
 
@@ -51,6 +52,7 @@ const App = () => {
         data: response.data,
         title: obj.title,
         quantity: 10, // set this default elsewhere so it doesn't always reset
+        url: obj.url
       }})
     } catch(err) {
       console.log(err);
@@ -82,6 +84,7 @@ const App = () => {
       <Tables
         scrapedLinks={scrapedLinks[key]}
         tableName={[key]}
+        scrape={(obj) => scrape(obj)}
         dropTable={(table) => dropTable(table)}/>
     )}
     </>

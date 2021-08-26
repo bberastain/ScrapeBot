@@ -27,14 +27,15 @@ app.get('/drop', (req, res) => {
 
 app.get('/links', async (req, res) => {
   try {
-    let tables = await db.query(`SELECT title, tableName FROM searches`);
+    let tables = await db.query(`SELECT title, tableName, url FROM searches`);
     let results = {};
     for (var obj of tables) {
       let links = await db.query('SELECT * FROM ' + obj.tablename);
       results = {...results, [obj.tablename]: {
         data: links,
         title: obj.title,
-        quantity: 10
+        quantity: 10,
+        url: obj.url
       }}
     }
     res.send(results);
