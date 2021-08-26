@@ -1,10 +1,10 @@
 const puppeteer = require('puppeteer');
 
-const scrape = async (url) => {
+const scrape = async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto(url);
-  await page.waitForSelector('a.result-title')
+  await page.goto('https://offerup.com/?__cf_chl_captcha_tk__=pmd_awYT7WFecm3VTNt3ppLVNiSGsPPcZWShzLt7c7NkRHQ-1630001767-0-gqNtZGzNAuWjcnBszQel');
+  await page.waitForSelector('a.jss265')
 
   let scrapedInfo = await page.evaluate(() => {
     // debugger;
