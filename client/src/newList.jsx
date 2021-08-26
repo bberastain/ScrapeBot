@@ -9,13 +9,23 @@ const NewList = (props) => {
   }
 
   return(
-    <div className="new-list">
-    <h2>Create New List</h2>
-    <label>Search URL</label>
-    <input type="text" id="url" value={newList.url} onChange={(e) => setList({...newList, url: e.target.value})}></input>
-    <label>List Title</label>
-    <input type="text" id="title" value={newList.title} onChange={(e) => setList({...newList, title: e.target.value})}></input>
-    <button onClick={handleClick}>Scrape CraigsList</button>
+    <div className="list-container">
+      <div className="new-list">
+      <h2>Create New List</h2>
+        <div className="search-container">
+          <div className="search-criteria">
+            <label>Search URL</label>
+            <input type="text" id="url" value={newList.url} onChange={(e) => setList({...newList, url: e.target.value})}></input>
+          </div>
+          <div className="search-criteria">
+            <label>List Title</label>
+            <input type="text" id="title" value={newList.title} onChange={(e) => setList({...newList, title: e.target.value})}></input>
+          </div>
+        </div>
+        <div className="search-button-container">
+          <button onClick={handleClick}>Scrape CraigsList</button>
+        </div>
+      </div>
     </div>
   )
 }

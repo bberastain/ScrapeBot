@@ -76,11 +76,13 @@ const App = () => {
 
   return (
     <>
-    <h1>CRAIGSLIST AGGREGATOR</h1>
-    <h2>A simple way to track the newest listings</h2>
-    <h3>Text updates via Twilio COMING SOON</h3>
-    <NewList newTable={(obj) => newTable(obj)}/>
-    <div className="results">
+      <header>
+      <h1 className="header">CRAIGSLIST AGGREGATOR</h1>
+      <h2 className="header">An easy portal to track the newest listings</h2>
+      <h3 className="header">Text updates via Twilio COMING SOON</h3>
+      </header>
+      <NewList newTable={(obj) => newTable(obj)}/>
+      <div className="results">
     {Object.keys(scrapedLinks).map(key =>
       <Tables
       scrapedLinks={scrapedLinks[key]}
@@ -88,7 +90,7 @@ const App = () => {
       scrape={(obj) => scrape(obj)}
       dropTable={(table) => dropTable(table)}/>
       )}
-    </div>
+      </div>
     </>
   )
 }
