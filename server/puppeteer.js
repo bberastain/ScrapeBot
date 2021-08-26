@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 
-const scrape = async () => {
+const scrape = async (url) => {
+  debugger;
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto('https://sfbay.craigslist.org/d/software-qa-dba-etc/search/sof');
+  await page.goto(url);
   await page.waitForSelector('a.result-title')
 
   let scrapedInfo = await page.evaluate(() => {

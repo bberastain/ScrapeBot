@@ -20,23 +20,34 @@ const App = () => {
 
   const newTable = (obj) =>{
     axios.post('/createTable', obj)
-      .then(() => {
-        // scrape data
-        // render new table
+      .then(res => {
+        alert(res.data);
+        try {
+          scrape(obj);
+        } catch(err) {
+          console.log(err);
+        }
       })
       .catch(err => {
         console.log(err);
       });
   }
 
-  const scrape = async () => {
+  const scrape = async (obj) => {
     try {
-      let response = await axios.get('/scrape');
-      let shortenedResponse = [];
-      for (var i = 0; i < 10; i++) {
-        shortenedResponse.push(response.data[i]);
-      }
-      setLinks(shortenedResponse);
+      let table = obj.title.split(' ').join('');
+      let response = await axios.get('/scrape', {
+        params: {
+          table: table,
+          url: obj.url
+        }
+      });
+      // Display Quantity should be stored in hook
+      // let shortenedResponse = [];
+      // for (var i = 0; i < 10; i++) {
+      //   shortenedResponse.push(response.data[i]);
+      // }
+      // setLinks(shortenedResponse);
     } catch(err) {
       console.log(err);
     }
@@ -56,10 +67,10 @@ const App = () => {
     <h1>CRAIGSLIST AGGREGATOR</h1>
     <div>A simple way to track the newest listings</div>
     <NewList newTable={(obj) => newTable(obj)}/>
-    <Tables
-      scrape={scrape}
+    {/* <Tables
+      scrape={obj => scrape(obj)}
       dropTable={dropTable}
-      scrapedLinks={scrapedLinks}/>
+      scrapedLinks={scrapedLinks}/> */}
     </>
   )
 }
