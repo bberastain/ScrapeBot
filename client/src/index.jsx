@@ -77,6 +77,7 @@ const App = () => {
     {Object.keys(scrapedLinks).map(key =>
       <Tables
         scrapedLinks={scrapedLinks[key]}
+        tableName={[key]}
         dropTable={(table) => dropTable(table)}/>
     )}
     </>

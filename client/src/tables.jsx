@@ -10,7 +10,7 @@ const Tables = (props) => {
       )}
       </ul>
       <button >Scrape</button>
-      <button onClick={() => props.dropTable('SoftwareJobs')}>Delete</button>
+      <button onClick={() => props.dropTable(props.tableName)}>Delete</button>
     </div>
   )
 }
