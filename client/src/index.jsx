@@ -59,7 +59,11 @@ const App = () => {
 
   const dropTable = async (table) => {
     try {
-      // axios.get('/drop', );
+      axios.get('/drop', {
+        params: {
+          table: table
+        }
+      });
       let hooks = scrapedLinks;
       delete hooks[table];
       setLinks({...hooks});

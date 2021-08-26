@@ -15,8 +15,8 @@ app.use(morgan('tiny'));
 
 app.get('/drop', (req, res) => {
   try {
-    let table = 'listings'
-    db.query(`DROP TABLE ${table}`);
+    let table = req.query.table
+    db.query('DROP TABLE ' + table);
   } catch(err) {
     console.log(err);
     res.send(err);
