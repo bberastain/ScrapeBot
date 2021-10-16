@@ -5,6 +5,7 @@ const scrape = async (url) => {
   const page = await browser.newPage();
   await page.goto(url);
   await page.waitForSelector('a.result-title')
+  // await page.screenshot({path: 'screenshot.png'});
 
   let scrapedInfo = await page.evaluate(() => {
     // debugger;
@@ -20,9 +21,10 @@ const scrape = async (url) => {
       })
     }
     // console.log(links)
+    console.log('DO THAT THING I LIKE')
     return results;
   })
-  await browser.close();
+  // await browser.close();
   return scrapedInfo;
 }
 
